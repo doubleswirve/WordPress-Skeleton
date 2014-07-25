@@ -1,0 +1,22 @@
+---
+# Common
+#
+# General tasks for getting VM up-to-date
+- name: "Common: Get software for apt-repo management."
+  apt: >
+    pkg={{ item }}
+    state=installed
+  with_items:
+    - python-apt
+    - python-pycurl
+
+- name: "Common: Disable firewall for development."
+  service: name=ufw state=stopped
+
+- name: "Common: Install Git and cURL."
+  apt: >
+    pkg={{ item }}
+    state=installed
+  with_items:
+    - git
+    - curl

@@ -1,0 +1,14 @@
+---
+# Simple LAMP setup for WordPress
+- hosts: all
+
+  pre_tasks:
+    - name: "Pre tasks: Update apt cache if needed"
+      apt: update_cache=yes cache_valid_time=604800
+
+  roles:
+    - common
+    - mysql
+    - apache
+    - php    
+    - wordpress

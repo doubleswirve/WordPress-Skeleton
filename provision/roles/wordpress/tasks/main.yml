@@ -1,0 +1,52 @@
+---
+# WordPress
+#
+# Download WordPress
+- name: "WordPress: Download WP-CLI."
+  get_url: >
+    url=https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+    dest=/usr/local/bin/wp
+    mode=0755
+
+- name: "WordPress: Download the WordPress core."
+  command: >
+    wp core download
+    --path=/var/www/wp
+    --version={{ wp_version }}
+    --allow-root
+  ignore_errors: True
+
+- name: "WordPress: Create local-config.php."
+  template: >
+    src=local-config.php
+    dest=/var/www
+
+- name: "WordPress: Check if site installed"
+  command: >
+    wp core is-installed
+    --allow-root
+    chdir=/var/www/wp
+  register: site_status
+  ignore_errors: True
+
+- name: "WordPress: Install WordPress"
+  command: >
+    wp core multisite-install
+    --allow-root
+    --url=http://{{ site }}
+    --title='{{ title }}'
+    --admin_user='{{ admin_user }}'
+    --admin_password='{{ admin_password }}'
+    --admin_email='{{ admin_email }}'
+    chdir=/var/www/wp
+  when: site_status.rc == 1
+
+- name: "WordPress: Create local-multisite-config.php."
+  template: >
+    src=local-multisite-config.php
+    dest=/var/www
+
+- name: "WordPress: Create .htaccess."
+  template: >
+    src=.htaccess
+    dest=/var/www

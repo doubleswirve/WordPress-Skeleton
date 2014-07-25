@@ -1,0 +1,40 @@
+---
+# Apache
+#
+# Install Apache and Sendmail
+- name: "Apache: Install Apache and Sendmail."
+  apt: >
+    pkg={{ item }}
+    state=installed
+  with_items:
+    - apache2
+    - sendmail
+
+- name: "Apache: Start Apache."
+  service: name=apache2 state=started enabled=yes
+
+- name: "Apache: Enable Apache rewrite module."
+  apache2_module: name=rewrite state=present
+  notify: restart apache
+
+- name: "Apache: Add Apache virtualhost."
+  template: >
+    src=vhost.conf
+    dest=/etc/apache2/sites-available/{{ site }}.conf
+    owner=root
+    group=root
+    mode=644
+  notify: restart apache
+
+- name: "Apache: Symlink Apache virtualhost."
+  file: >
+    src=/etc/apache2/sites-available/{{ site }}.conf
+    dest=/etc/apache2/sites-enabled/{{ site }}.conf
+    state=link
+  notify: restart apache
+
+- name: "Apache: Remove Apache default virtual host"
+  file: >
+    path=/etc/apache2/sites-enabled/000-default
+    state=absent
+  notify: restart apache

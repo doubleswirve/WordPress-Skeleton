@@ -1,0 +1,16 @@
+---
+# Sites
+sites:
+  - "example.dev"
+  - "sub0.example.dev"
+  - "sub1.example.dev"
+
+# Main Site
+site: "example.dev"
+title: "Example WP Multisite"
+admin_user: "admin"
+admin_password: "admin"
+admin_email: "admin@example.dev"
+
+# WordPress
+wp_version: "3.9.1"
