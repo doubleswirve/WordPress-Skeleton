@@ -33,9 +33,11 @@ The `.htaccess` file should not require any editing.
 
 ## Assumptions
 
-* WordPress as a Git submodule in `/wp/`
+* ~~WordPress as a Git submodule in `/wp/`~~
+    * WordPress installed via WP-CLI with the version specified in `provision/group_vars/all.yml`
 * Custom content directory in `/content/` (cleaner, and also because it can't be in `/wp/`)
 * `wp-config.php` in the root (because it can't be in `/wp/`)
+    * Note: `wp-config.php` _will be_ in the root after provisioning
 * All writable directories are symlinked to similarly named locations under `/shared/`.
 
 ## Questions & Answers
