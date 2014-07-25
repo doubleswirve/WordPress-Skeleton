@@ -23,6 +23,14 @@ To get started simply run `vagrant up`. You'll have to edit your local `/etc/hos
 
 Use the URLs you set in the `all.yml` file. Now you should be able to access the development site at [http://example.dev](http://example.dev).
 
+### WP Config
+
+The configuration files have been set as templates in the WordPress Ansible role `provision/roles/wordpress/templates`. The `local-config.php` template is where you will want to set your development MySQL credentials. This might be something to move to the Ansible group vars as well.
+
+`wp-config` will be edited by WP-CLI &mdash; it will add the generated multisite configuration above the `/* That's all, stop editing! Happy blogging. */` line.
+
+The `.htaccess` file should not require any editing.
+
 ## Assumptions
 
 * WordPress as a Git submodule in `/wp/`
