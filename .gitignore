@@ -6,5 +6,5 @@
 /db-sync
 /content/upgrade/
 .DS_Store
-/wp
+wp/
 .vagrant/
