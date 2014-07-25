@@ -2,9 +2,11 @@
 /local-config.php
 /local-multisite-config.php
 /.htaccess
+/wp-config.php
 /sql-dump-*.sql
 /db-sync
 /content/upgrade/
 .DS_Store
 wp/
 .vagrant/
+

@@ -29,29 +29,31 @@
   register: site_status
   ignore_errors: True
 
-- name: "WordPress: Install WordPress"
+- name: "WordPress: Create wp-config.php."
+  template: >
+    src=wp-config.php
+    dest=/var/www
+  when: site_status.rc == 1
+
+- name: "WordPress: Multisite install."
   command: >
-    wp core install
-    --allow-root
-    --url=http://{{ site }}
+    wp core multisite-install
+    --url='http://{{ site }}/wp'
+    --subdomains
     --title='{{ title }}'
     --admin_user='{{ admin_user }}'
     --admin_password='{{ admin_password }}'
     --admin_email='{{ admin_email }}'
-    chdir=/var/www/wp
-  when: site_status.rc == 1
-
-- name: "WordPress: Update WordPress Site URL option."
-  command: >
-    wp option update siteurl 'http://{{ site }}/wp'
     --allow-root
     chdir=/var/www/wp
   when: site_status.rc == 1
 
-- name: "WordPress: Create local-multisite-config.php."
-  template: >
-    src=local-multisite-config.php
-    dest=/var/www
+- name: "WordPress: Update site home."
+  command: >
+    wp option update home 'http://{{ site }}'
+    --allow-root
+    chdir=/var/www/wp
+  when: site_status.rc == 1
 
 - name: "WordPress: Create .htaccess."
   template: >
