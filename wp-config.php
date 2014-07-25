@@ -13,6 +13,12 @@ if ( file_exists( dirname( __FILE__ ) . '/local-config.php' ) ) {
 	define( 'DB_HOST', '%%DB_HOST%%' ); // Probably 'localhost'
 }
 
+// ============================
+// Load multisite configuration
+// ============================
+if ( file_exists( dirname( __FILE__ ) . '/local-multisite-config.php' ) )
+    include( dirname( __FILE__ ) . '/local-multisite-config.php' );
+
 // ========================
 // Custom Content Directory
 // ========================
