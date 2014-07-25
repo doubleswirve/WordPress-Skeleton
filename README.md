@@ -2,6 +2,27 @@
 
 This is simply a skeleton repo for a WordPress site. Use it to jump-start your WordPress site repos, or fork it and customize it to your own liking!
 
+## This Fork
+
+The goal of this fork is provide an easy way to set up WordPress Multisite using the WordPress Skeleton directory structure. The following are some potential gotchas:
+
+* Only tested on OS X
+* Requires Ansible, Vagrant for local provisioning
+* Only tested with the subdomain multisite option
+* Certainly not yet secure for live deployment
+* Uses Apache
+* Vagrant uses NFS for synced folders
+
+The main configuration is located in `provision/group_vars/all.yml`. There you can state your main site URL and any subdomains you have. The provisioner will set up the Apache virtual hosts for you. Additionally, set the WP info so the provisioner can install and configure multisite using WP-CLI.
+
+To get started simply run `vagrant up`. You'll have to edit your local `/etc/hosts` file to point to the VM's private IP, for example:
+
+```shell
+192.168.88.88 example.dev sub0.example.dev sub1.example.dev
+```
+
+Use the URLs you set in the `all.yml` file. Now you should be able to access the development site at [http://example.dev](http://example.dev).
+
 ## Assumptions
 
 * WordPress as a Git submodule in `/wp/`
