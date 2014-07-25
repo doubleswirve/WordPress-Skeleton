@@ -7,7 +7,7 @@ You may include other settings here that you only want enabled on your local dev
 
 define( 'MULTISITE', true );
 define( 'SUBDOMAIN_INSTALL', true );
-define( 'DOMAIN_CURRENT_SITE', 'pc.dev' );
+define( 'DOMAIN_CURRENT_SITE', '{{ site }}' );
 define( 'PATH_CURRENT_SITE', '/' );
 define( 'SITE_ID_CURRENT_SITE', 1 );
 define( 'BLOG_ID_CURRENT_SITE', 1 );
