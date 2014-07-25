@@ -31,7 +31,7 @@
 
 - name: "WordPress: Install WordPress"
   command: >
-    wp core multisite-install
+    wp core install
     --allow-root
     --url=http://{{ site }}
     --title='{{ title }}'
