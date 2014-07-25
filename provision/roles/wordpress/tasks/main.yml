@@ -43,7 +43,9 @@
 
 - name: "WordPress: Update WordPress Site URL option."
   command: >
-    wp option update siteurl 'http://{{ site }}/wp/'
+    wp option update siteurl 'http://{{ site }}/wp'
+    --allow-root
+    chdir=/var/www/wp
   when: site_status.rc == 1
 
 - name: "WordPress: Create local-multisite-config.php."
