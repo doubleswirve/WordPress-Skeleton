@@ -59,3 +59,10 @@
   template: >
     src=.htaccess
     dest=/var/www
+
+- name: "WordPress: Create writeable uploads directory."
+  file: >
+    path=/var/www/content/uploads
+    state=directory
+    mode=777
+    recurse=yes
