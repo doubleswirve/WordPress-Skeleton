@@ -7,5 +7,5 @@
 /content/upgrade/
 /content/uploads/
 .DS_Store
-wp/
+/wp/
 .vagrant/
